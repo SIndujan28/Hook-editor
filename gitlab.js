@@ -4,6 +4,7 @@ const inquirer=require('inquirer')
 const getProjects=require('./utils').getProjects
 const getHooks=require('./utils').getHooks
 const editHook=require('./utils').editHook
+ function GLHookEditor() {
 inquirer.prompt([{
     type:'text',
     name:'groupID',
@@ -83,6 +84,6 @@ inquirer.prompt([{
         // });
         // console.log("+++++"+hooks)
     })
-
-
 })
+}
+module.exports=GLHookEditor

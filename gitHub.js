@@ -2,7 +2,7 @@ const inquirer=require('inquirer')
 const getRepos=require('./utils').getRepos
 const githubHooks=require('./utils').githubHooks
 
-export default function GhHookEditor() { 
+ function GhHookEditor() { 
 inquirer.prompt([{
     type:'text',
     name:'groupName',
@@ -42,3 +42,4 @@ inquirer.prompt([{
     })
 })
 }
+module.exports=GhHookEditor
