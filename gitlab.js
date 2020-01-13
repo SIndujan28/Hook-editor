@@ -54,15 +54,20 @@ inquirer.prompt([{
         // });
         inquirer.prompt([{
             type:'text',
+            message:'Enter the url to be searched',
+            name:'searchURL'
+        },{
+            type:'text',
             message:'Enter the url to be replaced',
-            name:'url'
+            name:'replaceURL'
         }]).then((answers) => {
-            let url=answers.url
+            let searchURL=answers.searchURL
+            let replaceURL=answers.replaceURL
             for (var i=0;i < hooks.length;i++) {
                 let pId=hooks[i].projectId
                 let hpp=hooks[i].hooks
                 for (var j=0;j < hpp.length;j++) {
-                    editHook(pId,hpp[j],url,access_token)
+                    editHook(pId,hpp[j],searchURL,replaceURL,access_token)
                 }
             }
 
