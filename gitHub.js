@@ -1,6 +1,7 @@
 const inquirer=require('inquirer')
 const getRepos=require('./utils').getRepos
 const githubHooks=require('./utils').githubHooks
+const editGHook=require('./utils').editGHook
 
  function GhHookEditor() { 
 inquirer.prompt([{
@@ -29,7 +30,7 @@ inquirer.prompt([{
         choices:repoList
     }]).then(async (answers) => {
         let selected_repos=answers.selected_repos
-        let done=await Promise.all(selected_repos.map(async(item) => {
+        let hooks=await Promise.all(selected_repos.map(async(item) => {
             const hpp= await githubHooks(groupName,item,access_token)
             const low=hpp.map((el) => {
                 return {id:el.id,url:el.config.url}
@@ -38,7 +39,26 @@ inquirer.prompt([{
             return {name:item,hooks:low}
         }))
 
-         console.log(done)
+         console.log(hooks)
+         inquirer.prompt([{
+             type:'text',
+             name:'searchURL',
+             message:'Enter the URL to be searched'
+         },{
+             type:'text',
+             name:'replaceURL',
+             message:'Enter the url to be replace'
+         }]).then((answer)=>{
+             let searchURL=answer.searchURL
+             let replaceURL=answer.replaceURL
+             for (var i=0;i < hooks.length;i++) {
+                let repoName=hooks[i].name
+                let hpp=hooks[i].hooks
+                for (var j=0;j < hpp.length;j++) {
+                    editGHook(groupName,repoName,hpp[j],searchURL,replaceURL,access_token)
+                }
+            }
+         })
     })
 })
 }

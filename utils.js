@@ -70,9 +70,19 @@ async function editGHook(orgName,repoName,hook,searchURL,replaceURL,token) {
         let newURL=hookURL.replace(/(?:^https?:\/\/([^\/]+)(?:[\/,]|$)|^(.*)$)/,replaceURL)
         console.log(hookId)
         console.log(newURL)
-        const response=await  axios.patch(`https://api.github.com/repos/${orgName}/${repoName}/hooks/${hookId}`,{ headers: { Authorization:`token ${token}`}},{
-            config:{
-                url:newURL
+        // const response=await  axios.patch(`https://api.github.com/repos/${orgName}/${repoName}/hooks/${hookId}`,{ headers: { Authorization:`token ${token}`}},{
+        //     config:{
+        //         url:newURL
+        //     }
+        // })
+        const response=await axios({
+            method: 'patch',
+            url:`https://api.github.com/repos/${orgName}/${repoName}/hooks/${hookId}`,
+            headers: { Authorization:`token ${token}`},
+            data: {
+                config:{
+                    url:newURL
+                }
             }
         })
     }catch(err) {
