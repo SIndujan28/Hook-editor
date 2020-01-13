@@ -26,3 +26,18 @@ async function getGroups(token) {
         console.log(err)
     }
 }
+async function editHook(projectId,hook,url,token) {
+    try {
+        let hookId=hook.hookId
+        let hookURL=hook.url
+        let newURL=hookURL.replace(/(?:^https?:\/\/([^\/]+)(?:[\/,]|$)|^(.*)$)/,url)
+        console.log(hookId)
+        console.log(newURL)
+        const response= await axios.put(`https://gitlab.com/api/v4/projects/${projectId}/hooks/${hookId}?access_token=${token}`,{
+            url:newURL
+        })
+
+    }catch(err) {
+        console.log(err)
+    }
+}
