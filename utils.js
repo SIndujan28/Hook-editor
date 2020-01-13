@@ -41,3 +41,8 @@ async function editHook(projectId,hook,url,token) {
         console.log(err)
     }
 }
+function filterFunction(array,regEx) {
+    const result=array.filter(item => item.url.includes(regEx))
+    console.log('hi')
+    return result
+}
