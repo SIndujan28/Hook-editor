@@ -74,3 +74,11 @@ function filterFunction(array,regEx) {
 //                     })
 //             });
 //             })
+
+module.exports={
+    getGroups:getGroups,
+    getProjects:getProjects,
+    getHooks:getHooks,
+    editHook:editHook,
+    filterFunction:filterFunction
+}
