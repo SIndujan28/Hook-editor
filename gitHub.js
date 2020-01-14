@@ -7,7 +7,7 @@ const editGHook=require('./utils').editGHook
 inquirer.prompt([{
     type:'text',
     name:'groupName',
-    message:'Enter the group name'
+    message:'Enter the organization name'
 },{
     type:'text',
     name:'access_token',
@@ -17,9 +17,8 @@ inquirer.prompt([{
     const access_token=answers.access_token
     let repos=await getRepos(groupName,access_token)
     let repoList=[]
-    console.log(Array.isArray(repos))
     let repoName=repos.map((item) => {
-        console.log("Name: "+item.name,"full_name: "+item.full_name)
+        console.log("-> "+item.name,"full_name: "+item.full_name)
         repoList.push({name:item.name})
         return item.name
     })
@@ -38,8 +37,6 @@ inquirer.prompt([{
             console.log(low)
             return {name:item,hooks:low}
         }))
-
-         console.log(hooks)
          inquirer.prompt([{
              type:'text',
              name:'searchURL',
