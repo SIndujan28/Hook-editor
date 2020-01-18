@@ -70,11 +70,6 @@ async function editGHook(orgName,repoName,hook,searchURL,replaceURL,token) {
         let newURL=hookURL.replace(/(?:^https?:\/\/([^\/]+)(?:[\/,]|$)|^(.*)$)/,replaceURL)
         console.log(hookId)
         console.log(newURL)
-        // const response=await  axios.patch(`https://api.github.com/repos/${orgName}/${repoName}/hooks/${hookId}`,{ headers: { Authorization:`token ${token}`}},{
-        //     config:{
-        //         url:newURL
-        //     }
-        // })
         const response=await axios({
             method: 'patch',
             url:`https://api.github.com/repos/${orgName}/${repoName}/hooks/${hookId}`,
@@ -94,34 +89,6 @@ function filterFunction(array,regEx) {
     console.log('hi')
     return result
 }
-// getGroups('SH7bWx9L86yBaNbvasAy')
-// getProjects('6895746','SH7bWx9L86yBaNbvasAy')
-//  getHooks('16250563','SH7bWx9L86yBaNbvasAy').then(response => filterFunction(response,'1569879'))
-
-// console.log(Array.isArray(response))
-// filterFunction(response,'1569879')
-//  editHook('16250563','1569875','http://hola.com','SH7bWx9L86yBaNbvasAy')
-
-// let token='SH7bWx9L86yBaNbvasAy'
-//     getGroups(token)
-//         .then((data) => {
-//             data.forEach(group => {
-//                 getProjects(group.id,token)
-//                     .then((projects) => {
-//                         projects.forEach(project => {
-//                             getHooks(project.id,token)
-//                                 .then((hooks) => {
-//                                     hooks.forEach(hook => {
-//                                         const result=filterFunction(hooks,'ambi')
-//                                         console.log(result)
-//                                             result.forEach((item) =>editHook(project.id,item.id,'http://tortoise.com',token) )
-//                                         // editHook(project.id,hook.id,'http://socialism.com',token)
-//                                     });
-//                                 })
-//                         });
-//                     })
-//             });
-//             })
 
 module.exports={
     getGroups:getGroups,

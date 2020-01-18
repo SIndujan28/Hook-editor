@@ -1,6 +1,5 @@
 const inquirer=require('inquirer')
 
-//  const getGroups=require('./git').getGroups
 const getProjects=require('./utils').getProjects
 const getHooks=require('./utils').getHooks
 const editHook=require('./utils').editHook
@@ -30,7 +29,7 @@ inquirer.prompt([{
         projectList.push({name:item.id})
         return item.id
     })
-    // console.log(projects,projectList)
+
     inquirer.prompt([{
         type:'checkbox',
         message:'Select the required projects',
@@ -38,7 +37,6 @@ inquirer.prompt([{
         choices:projectList
     }]).then(async (answers) => {
         let projects=answers.projectList
-        // console.log(answers.projectList,projects)
         let hooks=[]
         for (var i=0;i < projects.length;i++) {
             let r=await getHooks(projects[i],access_token)
@@ -48,11 +46,7 @@ inquirer.prompt([{
             })
             hooks.push({projectId:projects[i],hooks:hookpp})
         }
-        // console.log("+++++"+hooks)
-        // hooks.forEach(element => {
-        //     console.log(element.projectId,element.hooks)
-            
-        // });
+
         inquirer.prompt([{
             type:'text',
             message:'Enter the url to be searched',
@@ -73,16 +67,6 @@ inquirer.prompt([{
             }
 
         })
-        // projects.forEach(async (project) => {
-        //     let response=await getHooks(project,access_token)
-        //     let hookperproject=response.map((item) => {
-        //         console.log(item.id,item.url)
-        //         return item.id
-        //     })
-        //        hooks.push({projectId:project,hooks:hookperproject})
-        //     console.log(hooks)
-        // });
-        // console.log("+++++"+hooks)
     })
 })
 }
